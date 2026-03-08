@@ -3,8 +3,7 @@
 
 A fully automated Space Operations Center (SOC) pipeline that monitors the Starlink satellite constellation for potential conjunctions (close approaches) with other resident space objects. The system ingests live Two-Line Element (TLE) data from Space-Track.org, propagates orbits using SGP4, detects close-approach candidate pairs via a KD-Tree spatial index, computes Time of Closest Approach (TCA) and miss-distance metrics, scores events by risk, validates results against the SOCRATES reference catalog, and presents everything in an interactive 3D Dash/Plotly dashboard.
 
-> **Note:** This project was co-developed with my brother. You can view his GitHub profile [here](https://github.com/sxm209/Space_Collision_Detection).
-
+> **Note:** This project was co-developed with my brother. You can view his GitHub profile [here](https://github.com/sxm209/Starlink-Project).
 ---
 
 
