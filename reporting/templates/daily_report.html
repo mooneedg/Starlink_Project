@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Conjunction Risk Report</title>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; background-color: #090B10; color: #E2E8F0; margin: 0; padding: 20px; }
+        .container { max-width: 1200px; margin: auto; }
+        .header { border-bottom: 2px solid #222631; padding-bottom: 20px; margin-bottom: 20px; }
+        h1 { color: #00E5FF; margin: 0; font-weight: 800; letter-spacing: 1px;}
+        h2 { color: #94A3B8; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #222631; padding-bottom: 5px;}
+        
+        .metric-cards { display: flex; gap: 15px; margin-bottom: 30px; }
+        .card { background-color: #12161F; border: 1px solid #222631; border-radius: 6px; padding: 15px; flex: 1; text-align: center; }
+        .card-value { font-size: 24px; font-weight: bold; color: #00FFFF; margin-bottom: 5px; }
+        .card-label { font-size: 11px; color: #94A3B8; text-transform: uppercase; }
+        .card-alert { color: #FF3333; }
+        
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background-color: #12161F; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #222631; }
+        th { background-color: #0D1017; color: #94A3B8; font-size: 12px; text-transform: uppercase; }
+        tr:hover { background-color: #1A1E29; }
+        
+        .chart-container { background-color: #12161F; border: 1px solid #222631; border-radius: 6px; padding: 10px; margin-bottom: 30px; }
+        .status-pass { color: #00FF00; font-weight: bold;}
+        .status-fail { color: #FF3333; font-weight: bold;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>STARLINK COLLISION REPORT</h1>
+            <div style="color: #94A3B8; font-size: 12px; margin-top: 5px;">GENERATED: {{ date }} UTC</div>
+        </div>
+
+        <div class="metric-cards">
+            <div class="card">
+                <div class="card-value">{{ total_objects }}</div>
+                <div class="card-label">Objects Tracked</div>
+            </div>
+            <div class="card">
+                <div class="card-value">{{ total_events }}</div>
+                <div class="card-label">Total Conjunctions</div>
+            </div>
+            <div class="card">
+                <div class="card-value card-alert">{{ high_risk_events }}</div>
+                <div class="card-label">High-Risk Events</div>
+            </div>
+        </div>
+
+        <h2>Section 1: Top 10 Highest Risk Threats</h2>
+        {{ top_events_table | safe }}
+
+        <h2>Section 2: System Validation Metrics</h2>
+        <div class="metric-cards">
+            <div class="card">
+                <div class="card-value">{{ recall }}</div>
+                <div class="card-label">SOCRATES Recall</div>
+            </div>
+            <div class="card">
+                <div class="card-value">{{ precision }}</div>
+                <div class="card-label">SOCRATES Precision</div>
+            </div>
+            <div class="card">
+                <div class="card-value">{{ mean_miss_error }} km</div>
+                <div class="card-label">Mean Distance Error</div>
+            </div>
+        </div>
+
+        <h2>Section 3: Risk Distribution</h2>
+        <div class="chart-container">
+            {{ risk_chart_html | safe }}
+        </div>
+
+        <h2>Section 4: Pipeline Health</h2>
+        <table>
+            <tr><th>Metric</th><th>Status</th></tr>
+            <tr><td>Total Pipeline Runtime</td><td>{{ runtime_seconds }} seconds</td></tr>
+            <tr><td>Failed Steps</td><td>{{ failed_steps }}</td></tr>
+            <tr><td>Data Freshness (<24h)</td><td class="{{ 'status-pass' if data_fresh else 'status-fail' }}">{{ "PASS" if data_fresh else "STALE" }}</td></tr>
+        </table>
+    </div>
+</body>
+</html>
