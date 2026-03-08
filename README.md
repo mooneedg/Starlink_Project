@@ -59,26 +59,26 @@ The pipeline is organised into six sequential phases:
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │  Phase 1 │  Database Initialisation  (database/init_db.py)          │
-│          │  Creates space_objects, tles, object_groups tables        │
+│          │  Creates space_objects, tles, object_groups tables       │
 ├─────────────────────────────────────────────────────────────────────┤
 │  Phase 2 │  TLE Ingestion  (ingestion/ingest_spacetrack.py)         │
-│          │  Downloads latest TLEs from Space-Track.org via REST API  │
+│          │  Downloads latest TLEs from Space-Track.org via REST API │
 ├─────────────────────────────────────────────────────────────────────┤
 │  Phase 3 │  Orbit Propagation  (propagation/propagator.py)          │
-│          │  SGP4 via Skyfield → lat/lon/alt at 60-second intervals   │
-│          │  Output: data/processed/orbit_data.parquet                │
+│          │  SGP4 via Skyfield → lat/lon/alt at 60-second intervals  │
+│          │  Output: data/processed/orbit_data.parquet               │
 ├─────────────────────────────────────────────────────────────────────┤
 │  Phase 4a│  Spatial Indexing  (spatial_index/candidate_pairs.py)    │
-│          │  cKDTree radius query → filters candidate close pairs     │
-│          │  Output: data/processed/candidate_pairs.parquet           │
+│          │  cKDTree radius query → filters candidate close pairs    │
+│          │  Output: data/processed/candidate_pairs.parquet          │
 ├─────────────────────────────────────────────────────────────────────┤
-│  Phase 4b│  Conjunction Analysis  (conjunction/conjunction_analyzer) │
-│          │  Vectorized TCA + miss-distance + risk score              │
-│          │  Output: data/processed/conjunction_events.parquet        │
+│  Phase 4b│  Conjunction Analysis  (conjunction/conjunction_analyzer)│
+│          │  Vectorized TCA + miss-distance + risk score             │
+│          │  Output: data/processed/conjunction_events.parquet       │
 ├─────────────────────────────────────────────────────────────────────┤
 │  Phase 5 │  SOCRATES Validation  (validation/run_validation.py)     │
-│          │  Matches events vs. SOCRATES; computes precision/recall   │
-│          │  Output: data/processed/validation_metrics.json           │
+│          │  Matches events vs. SOCRATES; computes precision/recall  │
+│          │  Output: data/processed/validation_metrics.json          │
 └─────────────────────────────────────────────────────────────────────┘
            ↓
    Daily HTML Report  (reporting/report_generator.py)
