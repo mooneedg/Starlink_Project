@@ -106,8 +106,8 @@ The pipeline is organised into six sequential phases:
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/<your-username>/starlink-collision-avoidance.git
-cd starlink-collision-avoidance
+git clone https://github.com/mooneedg/Starlink_Project.git
+cd Starlink_Project
 
 
 # 2. Create and activate a virtual environment
@@ -129,6 +129,7 @@ pip install -r requirements.txt
 
 The ingestion module authenticates with Space-Track.org using credentials stored in a `.env` file in the project root.
 
+In the project root directory, create a new file named exactly **.env**.
 
 `.env`:
 ```
