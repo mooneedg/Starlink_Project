@@ -435,6 +435,7 @@ While the current pipeline successfully identifies deterministic close approache
 
 ## References & Context
 
+- "Stargaze: SpaceX's Space Situational Awareness System." *Starlink Updates*, SpaceX. [Link](https://starlink.com/pl/updates/stargaze?srsltid=AfmBOoogdEhaSzAXXL5JGr_WcFnvzpSqWe1_bmHkciaeilPjY8_5n5bt) 
 
 - Wall, Mike. "A SpaceX Starlink Satellite Is Tumbling and Falling Out of Space After Partial Breakup in Orbit." *Space.com*, 18 Dec. 2025. [Link](https://www.space.com/spacex-starlink-satellite-tumbling-falling-orbit-partial-breakup)
 
